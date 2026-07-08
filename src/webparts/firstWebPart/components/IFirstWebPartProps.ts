@@ -4,4 +4,5 @@ export interface IFirstWebPartProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  siteurl:string;
 }

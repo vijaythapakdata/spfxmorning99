@@ -29,7 +29,8 @@ export default class FirstWebPartWebPart extends BaseClientSideWebPart<IFirstWeb
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        siteurl:this.context.pageContext.web.absoluteUrl
       }
     );
 
@@ -92,6 +93,8 @@ export default class FirstWebPartWebPart extends BaseClientSideWebPart<IFirstWeb
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
   }
+
+  //webpart lifecycle  oninit(), render(), ondispose(),
 
   protected get dataVersion(): Version {
     return Version.parse('1.0');
