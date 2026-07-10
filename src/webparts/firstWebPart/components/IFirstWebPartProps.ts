@@ -5,4 +5,9 @@ export interface IFirstWebPartProps {
   hasTeamsContext: boolean;
   userDisplayName: string;
   siteurl:string;
+  country:string;
+  theme:string;
+  age:number;
+  enableFeature:boolean;
+  showTitle:boolean;
 }

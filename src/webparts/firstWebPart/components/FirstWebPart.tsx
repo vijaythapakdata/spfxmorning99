@@ -60,6 +60,12 @@ const FirstWebPart:React.FC<IFirstWebPartProps>=(props)=>{
 
     {props.description}
     {props.userDisplayName}
+    <p>{props.country}</p>
+    <p>{props.theme}</p>
+    <p>{props.age}</p>
+    <p>{props.enableFeature?"Enabled":"Disabled"}</p>
+    <p>{props.showTitle?"Title: " + props.showTitle:"Title not shown"}</p>
+
     <br/>
     <UseStateHook/>
     <br/>

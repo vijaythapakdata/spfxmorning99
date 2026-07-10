@@ -3,7 +3,10 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneToggle,PropertyPaneDropdown,PropertyPaneSlider,PropertyPaneChoiceGroup,
+  PropertyPaneCheckbox,
+  
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
@@ -14,6 +17,11 @@ import { IFirstWebPartProps } from './components/IFirstWebPartProps';
 
 export interface IFirstWebPartWebPartProps {
   description: string;
+  country:string;
+  theme:string;
+  age:number;
+  enableFeature:boolean;
+  showTitle:boolean;
 }
 
 export default class FirstWebPartWebPart extends BaseClientSideWebPart<IFirstWebPartWebPartProps> {
@@ -30,7 +38,13 @@ export default class FirstWebPartWebPart extends BaseClientSideWebPart<IFirstWeb
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        siteurl:this.context.pageContext.web.absoluteUrl
+        siteurl:this.context.pageContext.web.absoluteUrl,
+      country:this.properties.country,
+      theme:this.properties.theme,
+      age:this.properties.age,
+      enableFeature:this.properties.enableFeature,
+      showTitle:this.properties.showTitle
+      
       }
     );
 
@@ -94,6 +108,11 @@ export default class FirstWebPartWebPart extends BaseClientSideWebPart<IFirstWeb
     ReactDom.unmountComponentAtNode(this.domElement);
   }
 
+  //it will give you button to apply changes in property pane. if you set it to true then it will give you apply button and if you set it to false then it will not give you apply button. by default it is false.
+  protected get disableReactivePropertyChanges(): boolean {
+    return true;
+  }
+
   //webpart lifecycle  oninit(), render(), ondispose(),
 
   protected get dataVersion(): Version {
@@ -113,6 +132,38 @@ export default class FirstWebPartWebPart extends BaseClientSideWebPart<IFirstWeb
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneDropdown('country',{
+                  label:'Country',
+                options:[
+                  {key:'India',text:'India'},
+                  {key:'USA',text:'USA'},
+                  {key:'UK',text:'UK'},
+                  {key:'Canada',text:'Canada'},
+                ]
+                }),
+                PropertyPaneChoiceGroup('theme',{
+                  label:'Theme',
+                  options:[
+                    {key:'light',text:'Light'},
+                    {key:'dark',text:'Dark'}
+                  ]
+                }),
+                PropertyPaneSlider('age',{
+                  label:'Age',
+                  min:18,
+                  max:60,
+                  value:25,
+                  showValue:true,
+                  step:1
+                }),
+                PropertyPaneToggle('enableFeature',{
+                  label:'Enable Feature',
+                  onText:'On',
+                  offText:'Off'
+                }),
+                PropertyPaneCheckbox('showTitle',{
+                  text:'Show Title',
                 })
               ]
             }
