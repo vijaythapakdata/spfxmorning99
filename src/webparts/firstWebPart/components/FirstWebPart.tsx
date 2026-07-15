@@ -4,6 +4,9 @@ import type { IFirstWebPartProps } from './IFirstWebPartProps';
 // import { escape } from '@microsoft/sp-lodash-subset';
 import Home from '../../../Code/components/Home/Dashboard/Home';
 import UseStateHook from '../../../Code/hooks/Counter';
+import FormT from '../../../Code/components/Home/HomeForm';
+import SurveyPanel from '../../../Code/components/Home/FormPanel';
+import SurveyDialog from '../../../Code/components/Home/SurveyDialog';
 // import UseStateHook from '../../../Code/hooks/useStateHookseStateHook';
 // import useStateHook from '../../../Code/hooks/useStateHook';
 // import Us
@@ -70,6 +73,14 @@ const FirstWebPart:React.FC<IFirstWebPartProps>=(props)=>{
     <UseStateHook/>
     <br/>
     {props.siteurl}
+
+    <br/>
+    <hr/>
+    <FormT/>
+    <hr/>
+    <SurveyPanel/>
+    <hr/>
+    <SurveyDialog/>
     </>
   )
 }
